@@ -11,7 +11,7 @@ class AlertContainer extends Component {
     position: 'bottom left',
     theme: 'dark',
     time: 5000,
-    transition: 'scale'
+    transition: 'scale',
   }
 
   static propTypes = {
@@ -26,11 +26,8 @@ class AlertContainer extends Component {
     ]),
     theme: PropTypes.oneOf(['dark', 'light']),
     time: PropTypes.number,
-    transition: PropTypes.oneOf(['scale', 'fade'])
-  }
-
-  state = {
-    alerts: []
+    transition: PropTypes.oneOf(['scale', 'fade']),
+    alerts: PropTypes.array,
   }
 
   success = (message = '', options = {}) => {
@@ -72,11 +69,7 @@ class AlertContainer extends Component {
   }
 
   removeAlert = id => {
-    const alertRemoved = this.state.alerts.filter(alert => alert.id === id)[0]
-    this.setState(prevState => ({
-      alerts: prevState.alerts.filter(alert => alert.id !== id)
-    }))
-    alertRemoved && alertRemoved.onClose && alertRemoved.onClose()
+    this.props.onRemoveAlert(id);
   }
 
   render () {
@@ -89,7 +82,7 @@ class AlertContainer extends Component {
           transitionEnterTimeout={250}
           transitionLeaveTimeout={250}
         >
-          {this.state.alerts.map(alert => {
+          {this.props.alerts.map(alert => {
             return (
               <AlertMessage
                 key={alert.id}
