@@ -1,5 +1,5 @@
 {
-  "name": "react-alert",
+  "name": "@basharh/react-alert",
   "description": "A simple react alert component",
   "version": "2.3.0",
   "author": "Reinaldo Schiehll <rn.schiehll@gmail.com>",
